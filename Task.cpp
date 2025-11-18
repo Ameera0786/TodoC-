@@ -1,9 +1,19 @@
 #include "Task.h"
 
-Task::Task(std::string desc, std::string dl, int prio) 
-    : description(desc), deadline(dl), priority(prio), completed(false) {}
+Task::Task(const std::string& desc, const std::string& dl, int prio, bool done)
+    : description(desc), deadline(dl), priority(prio), completed(done) {}
 
-std::string Task::getPriorityString() const {
+const std::string& Task::getDescription() const { return description; }
+const std::string& Task::getDeadline() const { return deadline; }
+int Task::getPriority() const { return priority; }
+bool Task::isCompleted() const { return completed; }
+
+void Task::setDescription(const std::string& desc) { description = desc; }
+void Task::setDeadline(const std::string& dl) { deadline = dl; }
+void Task::setPriority(int prio) { priority = prio; }
+void Task::setCompleted(bool done) { completed = done; }
+
+std::string Task::getPriorityLabel() const {
     switch(priority) {
         case 1: return "High";
         case 2: return "Medium";

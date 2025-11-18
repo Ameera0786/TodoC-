@@ -7,21 +7,28 @@ class Task {
 private:
     std::string description;
     std::string deadline;
-    int priority; // 1 = High, 2 = Medium, 3 = Low
+    int priority;
     bool completed;
-    
+
 public:
-    Task(std::string desc, std::string dl, int prio);
-    
+    Task(const std::string& desc = "",
+         const std::string& dl = "",
+         int prio = 2,
+         bool done = false);
+
     // Getters
-    std::string getDescription() const { return description; }
-    std::string getDeadline() const { return deadline; }
-    int getPriority() const { return priority; }
-    bool isCompleted() const { return completed; }
-    std::string getPriorityString() const;
-    
+    const std::string& getDescription() const;
+    const std::string& getDeadline() const;
+    int getPriority() const;
+    bool isCompleted() const;
+
     // Setters
-    void setCompleted(bool status) { completed = status; }
+    void setDescription(const std::string& desc);
+    void setDeadline(const std::string& dl);
+    void setPriority(int prio);
+    void setCompleted(bool done);
+
+    std::string getPriorityLabel() const;
 };
 
 #endif

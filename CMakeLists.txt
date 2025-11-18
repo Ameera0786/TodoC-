@@ -7,4 +7,8 @@ add_executable(TodoList
         main.cpp
         Task.cpp
         TodoList.cpp
+        TaskRepository.cpp
+        TaskRepository.h
+        TodoUI.cpp
+        TodoUI.h
 )
