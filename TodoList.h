@@ -9,6 +9,7 @@ private:
     std::vector<Task> tasks;
 
 public:
+    bool isValidDate(const std::string& date);
     void add(const Task& task);
     void remove(int index);
     void markComplete(int index);
@@ -19,9 +20,7 @@ public:
     void sortByDeadline();
 
     void setTasks(const std::vector<Task>& newTasks);
-    bool isValidDate(const std::string& date) const;
-    std::string getDefaultDeadline() const;
-
+    std::string getDateOneYearFromNow();
 };
 
 #endif

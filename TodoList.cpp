@@ -5,7 +5,8 @@
 #include <iomanip>
 #include <cctype>
 
-bool isValidDate(const std::string& date) {
+// Validates date
+bool TodoList::isValidDate(const std::string& date) {
     if (date.length() != 10) return false;
     if (date[4] != '-' || date[7] != '-') return false;
 
@@ -25,8 +26,8 @@ bool isValidDate(const std::string& date) {
     return true;
 }
 
-
-std::string getDateOneYearFromNow() {
+// Default date
+std::string TodoList::getDateOneYearFromNow() {
     time_t now = time(0);
     tm* ltm = localtime(&now);
 
@@ -42,27 +43,32 @@ std::string getDateOneYearFromNow() {
     return ss.str();
 }
 
-
+// Adds task to list
 void TodoList::add(const Task& task) {
     tasks.push_back(task);
 }
 
+// Removes from list
 void TodoList::remove(int index) {
     tasks.erase(tasks.begin() + index);
 }
 
+// Marks complete
 void TodoList::markComplete(int index) {
     tasks[index].setCompleted(true);
 }
 
+// Gets all tasks
 const std::vector<Task>& TodoList::getTasks() const {
     return tasks;
 }
 
+// Sets tasks to new tasks
 void TodoList::setTasks(const std::vector<Task>& newTasks) {
     tasks = newTasks;
 }
 
+// Sorts by priority
 void TodoList::sortByPriority() {
     std::sort(tasks.begin(), tasks.end(),
               [](const Task& a, const Task& b){
@@ -70,17 +76,10 @@ void TodoList::sortByPriority() {
               });
 }
 
+// Sorts by deadline
 void TodoList::sortByDeadline() {
     std::sort(tasks.begin(), tasks.end(),
               [](const Task& a, const Task& b){
                   return a.getDeadline() < b.getDeadline();
               });
-}
-
-bool TodoList::isValidDate(const std::string& date) const {
-    return ::isValidDate(date); // use your existing function
-}
-
-std::string TodoList::getDefaultDeadline() const {
-    return getDateOneYearFromNow(); // your existing helper
 }

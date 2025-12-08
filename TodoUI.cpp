@@ -8,6 +8,7 @@ using namespace std;
 TodoUI::TodoUI(TodoList& list, TaskRepository& r)
     : todo(list), repo(r) {}
 
+// Displays menu
 void TodoUI::displayMenu() const {
     cout << "\n--- TODO LIST MANAGER ---\n";
     cout << "1. Add task\n";
@@ -19,6 +20,7 @@ void TodoUI::displayMenu() const {
     cout << "0. Save & Exit\n";
 }
 
+// Loads tasks and gives runnable options
 void TodoUI::run() {
     todo.setTasks(repo.load());
     std::string input;
@@ -51,7 +53,7 @@ void TodoUI::run() {
     } while(choice != 0);
 }
 
-
+// Adds a task
 void TodoUI::uiAddTask() {
     string desc, dl, prInput;
     int pr;
@@ -65,7 +67,7 @@ void TodoUI::uiAddTask() {
     cout << "Deadline (YYYY-MM-DD, leave empty for default): ";
     getline(cin, dl);
     if (dl.empty() || !todo.isValidDate(dl)) {
-        dl = todo.getDefaultDeadline();   // helper inside TodoList
+        dl = todo.getDateOneYearFromNow();
         cout << "Default deadline set (1 year from today).\n";
     }
     cout << "Priority (1-3, default = Medium): ";
@@ -84,6 +86,7 @@ void TodoUI::uiAddTask() {
     todo.add(Task(desc, dl, pr, false));
 }
 
+// View tasks
 void TodoUI::uiViewTasks() const {
     const auto& list = todo.getTasks();
     if(list.empty()) {
@@ -112,7 +115,7 @@ void TodoUI::uiViewTasks() const {
     }
 }
 
-
+// Sort
 void TodoUI::uiSortByPriority() {
     todo.sortByPriority();
 }
@@ -121,6 +124,7 @@ void TodoUI::uiSortByDeadline() {
     todo.sortByDeadline();
 }
 
+// Mark complete
 void TodoUI::uiMarkComplete() {
     int n;
     cout << "Task number: ";
@@ -139,6 +143,7 @@ void TodoUI::uiMarkComplete() {
     cout << "Task marked complete!\n";
 }
 
+// Delete
 void TodoUI::uiDeleteTask() {
     int n;
     cout << "Task number: ";
